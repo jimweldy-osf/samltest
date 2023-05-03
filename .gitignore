@@ -1,0 +1,8 @@
+.env
+obsolete/
+node_modules/
+*.log
+*.tmp
+*.swap
+
+
