@@ -38,6 +38,7 @@ app.get('/login', passport.authenticate('saml'));
 app.post('/callback',
   passport.authenticate('saml', { failureRedirect: '/' }),
   (req, res) => {
+    console.log("in callback and redirecting to lose ");
     res.redirect('/lose');
   }
 );
@@ -45,8 +46,10 @@ app.post('/callback',
 // Define the home route
 app.get('/', (req, res) => {
   if (req.isAuthenticated()) {
+    console.log("in clash and AUTHENTICATION WORKED!!!!!");
     res.send('Hello, ' + req.user.nameID);
   } else {
+    console.log("in slash but not authenticated");
     res.redirect('/login');
   }
 });
