@@ -36,10 +36,10 @@ app.get('/login', passport.authenticate('saml'));
 
 // Define the callback route
 app.post('/callback',
-  passport.authenticate('saml', { failureRedirect: '/' }),
+  passport.authenticate('saml', { failureRedirect: '/lose' }),
   (req, res) => {
     console.log("in callback and redirecting to lose ");
-    res.redirect('/lose');
+    res.redirect('/secure');
   }
 );
 
@@ -57,6 +57,11 @@ app.get('/', (req, res) => {
 app.get('/lose', (req, res) => {
   console.log("about to send saml.html ...");
   res.sendFile('saml.html', {root: __dirname + ''}); 
+});
+
+app.get('/secure', validUser, (req, res) => {
+  console.log("finally made it to secure!");
+  res.sendFile('sec.html', {root: __dirname + ''}); 
 });
 
 /*
