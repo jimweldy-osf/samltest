@@ -29,6 +29,7 @@ app.get('/metadata', (req, res) => {
   
 });
 
+/*
 app.get('/login',
     passport.authenticate('saml', { failureRedirect: '/', failureFlash: true }),
     function(req, res) {
@@ -36,12 +37,12 @@ app.get('/login',
       res.redirect('https://google.com');
     }
 );
+*/
 
 app.post('/adfs/postResponse',
     passport.authenticate('saml', { failureRedirect: '/', failureFlash: true }),
     function(req, res) {
       console.log("in /adfs/postresponse now...");
-      alert("in /adfs/postresponse now...");
       res.redirect('https://yahoo.com');
     }
 );
@@ -60,7 +61,6 @@ app.get('/secure', validUser, (req, res) => {
 function validUser(req, res, next) {
     if (!req.user) {
       console.log("valid user not found - redirecting to login");
-      alert("valid user not found - redirecting to login");
       res.redirect('https://mocksaml.com/saml/login');
     }
     next();
