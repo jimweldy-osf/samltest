@@ -28,9 +28,10 @@ passport.use(
         audience: "https://adfs.blahblah.com/FederationMetadata/2007-06/FederationMetadata.xml",
       },
     function (profile, done) {
-        return done(null, {
+      console.log("assertions can KILLLLLLLLLLLLLLLL");
+      return done(null, {
             upn: profile["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn"],
-        });
+      });
     }
     )
 );
