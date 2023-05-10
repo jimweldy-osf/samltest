@@ -32,6 +32,7 @@ app.get('/metadata', (req, res) => {
 app.get('/login',
     passport.authenticate('saml', { failureRedirect: '/', failureFlash: true }),
     function(req, res) {
+      console.log("in /login now...");
       res.redirect('https://acme_tools.com');
     }
 );
@@ -39,20 +40,24 @@ app.get('/login',
 app.post('/adfs/postResponse',
     passport.authenticate('saml', { failureRedirect: '/', failureFlash: true }),
     function(req, res) {
+      console.log("in /adfs/postresponse now...");
       res.redirect('https://acme_tools.com');
     }
 );
 
 app.get('/', (req, res) => {
+  console.log("about to send saml.html ...");
   res.sendFile('saml.html', {root: __dirname + ''}); 
 });
 
 app.get('/secure', validUser, (req, res) => {
+  console.log("finally made it to secure!");
   res.sendFile('sec.html', {root: __dirname + ''}); 
 });
 
 function validUser(req, res, next) {
     if (!req.user) {
+      console.log("valid user not found - redirecting to login");
       res.redirect('https://mocksaml.com/saml/login');
     }
     next();
