@@ -14,9 +14,9 @@ passport.deserializeUser((user, done) => {
 passport.use(
     new samlStrategy(
       {
-        entryPoint: "https://mocksaml.com/",
+        entryPoint: "https://mocksaml.com/saml/login",
         issuer: "devicetable.com",
-        callbackUrl: "https://samltest.devicetable.com/postResponse",
+        callbackUrl: "http://osf-dev-env.eba-kdcjyk3f.us-east-1.elasticbeanstalk.com/adfs/postResponse",
         privateKey: fs.readFileSync("./certs/key.pem", "utf-8"),
         cert: fs.readFileSync("./certs/cert.pem", "utf-8"),
         authnContext: [
