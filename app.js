@@ -41,6 +41,7 @@ app.post('/adfs/postResponse',
     passport.authenticate('saml', { failureRedirect: '/', failureFlash: true }),
     function(req, res) {
       console.log("in /adfs/postresponse now...");
+      alert("in /adfs/postresponse now...");
       res.redirect('https://yahoo.com');
     }
 );
@@ -55,9 +56,11 @@ app.get('/secure', validUser, (req, res) => {
   res.sendFile('sec.html', {root: __dirname + ''}); 
 });
 
+
 function validUser(req, res, next) {
     if (!req.user) {
       console.log("valid user not found - redirecting to login");
+      alert("valid user not found - redirecting to login");
       res.redirect('https://mocksaml.com/saml/login');
     }
     next();
