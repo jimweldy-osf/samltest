@@ -29,9 +29,9 @@ passport.use(
       },
     function (profile, done) {
       console.log("assertions can KILLLLLLLLLLLLLLLL");
-      return done(null, {
+        return done(null, {
             upn: profile["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn"],
-      });
+        });
     }
     )
 );
