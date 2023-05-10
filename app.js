@@ -36,9 +36,9 @@ app.get('/login', passport.authenticate('saml'));
 
 // Define the callback route
 app.post('/callback',
-  passport.authenticate('saml', { failureRedirect: '/lose' }),
+  passport.authenticate('saml', { failureRedirect: '/' }),
   (req, res) => {
-    res.redirect('/');
+    res.redirect('/lose');
   }
 );
 
