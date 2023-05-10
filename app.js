@@ -29,6 +29,30 @@ app.get('/metadata', (req, res) => {
   
 });
 
+
+// TAKING THIS FROM THE "ALLINONE" CHATGPT :)
+// Define the login route
+app.get('/login', passport.authenticate('saml'));
+
+// Define the callback route
+app.post('/callback',
+  passport.authenticate('saml', { failureRedirect: '/login' }),
+  (req, res) => {
+    res.redirect('/');
+  }
+);
+
+// Define the home route
+app.get('/', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.send('Hello, ' + req.user.nameID);
+  } else {
+    res.redirect('/login');
+  }
+});
+
+
+
 /*
 app.get('/login',
     passport.authenticate('saml', { failureRedirect: '/', failureFlash: true }),
@@ -37,7 +61,6 @@ app.get('/login',
       res.redirect('https://google.com');
     }
 );
-*/
 
 app.post('/adfs/postResponse',
     passport.authenticate('saml', { failureRedirect: '/', failureFlash: true }),
@@ -65,6 +88,7 @@ function validUser(req, res, next) {
     }
     next();
 }
+*/
 
 //var server = http.createServer(app);
 
