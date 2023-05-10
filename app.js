@@ -33,7 +33,7 @@ app.get('/login',
     passport.authenticate('saml', { failureRedirect: '/', failureFlash: true }),
     function(req, res) {
       console.log("in /login now...");
-      res.redirect('https://acme_tools.com');
+      res.redirect('https://google.com');
     }
 );
 
@@ -41,7 +41,7 @@ app.post('/adfs/postResponse',
     passport.authenticate('saml', { failureRedirect: '/', failureFlash: true }),
     function(req, res) {
       console.log("in /adfs/postresponse now...");
-      res.redirect('https://acme_tools.com');
+      res.redirect('https://yahoo.com');
     }
 );
 
