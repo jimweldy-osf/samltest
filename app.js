@@ -59,7 +59,7 @@ app.get('/lose', (req, res) => {
   res.sendFile('saml.html', {root: __dirname + ''}); 
 });
 
-app.get('/secure', validUser, (req, res) => {
+app.get('/secure', (req, res) => {
   console.log("finally made it to secure!");
   res.sendFile('sec.html', {root: __dirname + ''}); 
 });

@@ -16,7 +16,7 @@ passport.use(
       {
         entryPoint: "https://mocksaml.com/saml/login",
         issuer: "devicetable.com",
-        callbackUrl: "http://osf-dev-env.eba-kdcjyk3f.us-east-1.elasticbeanstalk.com/adfs/postResponse",
+        callbackUrl: "http://osf-dev-env.eba-kdcjyk3f.us-east-1.elasticbeanstalk.com/callback",
         privateKey: fs.readFileSync("./certs/key.pem", "utf-8"),
         cert: fs.readFileSync("./certs/cert.pem", "utf-8"),
         authnContext: [
