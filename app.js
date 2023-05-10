@@ -61,7 +61,7 @@ app.get('/secure', validUser, (req, res) => {
 function validUser(req, res, next) {
     if (!req.user) {
       console.log("valid user not found - redirecting to login");
-      //res.redirect('https://mocksaml.com/saml/login');
+      res.redirect('https://mocksaml.com/saml/login');
     }
     next();
 }
