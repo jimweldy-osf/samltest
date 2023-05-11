@@ -36,7 +36,7 @@ app.get('/login', passport.authenticate('saml'));
 
 // Define the callback route
 app.post('/callback',
-  //passport.authenticate('saml', { failureRedirect: '/lose' }),
+  passport.authenticate('saml', { failureRedirect: '/lose' }),
   midlog,
   (req, res) => {
     console.log("in callback and redirecting to secure ");
