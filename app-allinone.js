@@ -2,13 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const SamlStrategy = require('passport-saml').Strategy;
+const fs = require('fs');
 
 // Define the SAML configuration options
 const samlConfig = {
-  entryPoint: 'https://example.com/sso',
-  issuer: 'https://example.com',
-  callbackUrl: 'https://localhost:3000/callback',
-  cert: '-----BEGIN CERTIFICATE-----\n<certificate goes here>\n-----END CERTIFICATE-----',
+  entryPoint: 'https://mocksaml.com/saml/login',
+  issuer: 'https://devicetable.com',
+  callbackUrl: 'http://osf-dev-env.eba-kdcjyk3f.us-east-1.elasticbeanstalk.com/callback',
+  //cert: '-----BEGIN CERTIFICATE-----\n<certificate goes here>\n-----END CERTIFICATE-----',
+  cert: fs.readFileSync("./certs/idp_key.pem", "utf-8")
 };
 
 // Define the Passport SAML strategy
@@ -40,7 +42,8 @@ app.post('/callback',
 // Define the home route
 app.get('/', (req, res) => {
   if (req.isAuthenticated()) {
-    res.send('Hello, ' + req.user.nameID);
+    //res.send('Hello, ' + req.user.nameID);
+    res.sendFile('saml.html', {root: __dirname + ''});
   } else {
     res.redirect('/login');
   }
