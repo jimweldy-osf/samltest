@@ -53,7 +53,8 @@ app.post('/callbacktest', (req, res, next) => {
 
 
 // Define the callback route
-app.post('/callback',
+/*
+app.post('/callback', midlog,
 
   passport.authenticate('saml', (err, user, info) => {
     if (err) {
@@ -80,10 +81,12 @@ app.post('/callback',
     res.redirect('/secure');
   }
 );
+*/
 
 // Define the callback route
-app.post('/callbackog',
-  passport.authenticate('saml', { failureRedirect: '/lose' }),
+app.post('/callback',
+  midlog,
+  passport.authenticate('saml'),
   midlog,
   (req, res) => {
     console.log("in callback and redirecting to secure ");
@@ -92,7 +95,7 @@ app.post('/callbackog',
 );
 
 function midlog(req, res, next) {
-  console.log("made it to my own midlogger and REQ IS ", req.body);
+  console.log("made it to my own midlogger");
   next();
 }
 
