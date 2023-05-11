@@ -39,7 +39,7 @@ app.post('/callback',
   //passport.authenticate('saml', { failureRedirect: '/lose' }),
   midlog,
   (req, res) => {
-    console.log("in callback and redirecting to lose ");
+    console.log("in callback and redirecting to secure ");
     res.redirect('/secure');
   }
 );

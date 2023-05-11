@@ -11,6 +11,7 @@ passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
+console.log("loading passport.js config...");
 passport.use(
     new samlStrategy(
       {
