@@ -54,6 +54,7 @@ app.post('/callbacktest', (req, res, next) => {
 
 // Define the callback route
 app.post('/callback',
+/*
   passport.authenticate('saml', (err, user, info) => {
     if (err) {
       console.log("checkpoint alpha");
@@ -72,6 +73,7 @@ app.post('/callback',
       return res.status(200).json({ message: "Authentication succeeded" });
     });
   }),
+*/
   midlog,
   (req, res) => {
     console.log("in callback and redirecting to secure ");
