@@ -36,17 +36,23 @@ app.get('/login', passport.authenticate('saml'));
 
 // Define the callback route
 app.post('/callback',
-  passport.authenticate('saml', { failureRedirect: '/lose' }),
+  //passport.authenticate('saml', { failureRedirect: '/lose' }),
+  midlog,
   (req, res) => {
     console.log("in callback and redirecting to lose ");
     res.redirect('/secure');
   }
 );
 
+function midlog(req, res, next) {
+  console.log("made it to my own midlogger and REQ IS ", req.body);
+  next();
+}
+
 // Define the home route
 app.get('/', (req, res) => {
   if (req.isAuthenticated()) {
-    console.log("in clash and AUTHENTICATION WORKED!!!!!");
+    console.log("in slash and AUTHENTICATION WORKED!!!!!");
     res.send('Hello, ' + req.user.nameID);
   } else {
     console.log("in slash but not authenticated");
