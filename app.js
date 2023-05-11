@@ -34,8 +34,49 @@ app.get('/metadata', (req, res) => {
 // Define the login route
 app.get('/login', passport.authenticate('saml'));
 
+app.post('/callbacktest', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.status(401).json({ message: "Authentication failed" });
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      return res.status(200).json({ message: "Authentication succeeded" });
+    });
+  })(req, res, next);
+});
+
+
 // Define the callback route
 app.post('/callback',
+  passport.authenticate('saml', (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.status(401).json({ message: "Authentication failed" });
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      return res.status(200).json({ message: "Authentication succeeded" });
+    });
+  }),
+  midlog,
+  (req, res) => {
+    console.log("in callback and redirecting to secure ");
+    res.redirect('/secure');
+  }
+);
+
+// Define the callback route
+app.post('/callbackog',
   passport.authenticate('saml', { failureRedirect: '/lose' }),
   midlog,
   (req, res) => {
