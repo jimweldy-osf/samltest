@@ -56,15 +56,19 @@ app.post('/callbacktest', (req, res, next) => {
 app.post('/callback',
   passport.authenticate('saml', (err, user, info) => {
     if (err) {
+      console.log("checkpoint alpha");
       return next(err);
     }
     if (!user) {
+      console.log("checkpoint bravo");
       return res.status(401).json({ message: "Authentication failed" });
     }
     req.logIn(user, (err) => {
       if (err) {
+        console.log("checkpoint charlie");
         return next(err);
       }
+      console.log("checkpoint delta");
       return res.status(200).json({ message: "Authentication succeeded" });
     });
   }),
