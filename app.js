@@ -35,7 +35,7 @@ app.get('/metadata', (req, res) => {
 app.get('/login', passport.authenticate('saml'));
 
 app.post('/callbacktest', (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
+  passport.authenticate('saml', (err, user, info) => {
     if (err) {
       return next(err);
     }
