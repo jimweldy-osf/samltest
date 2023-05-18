@@ -5,6 +5,14 @@ const SamlStrategy = require('passport-saml').Strategy;
 const fs = require('fs');
 const session = require('express-session');
 
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
+
 //var port = normalizePort(process.env.PORT || '80');
 //console.log("port is ", port);
 const port = 8080;
