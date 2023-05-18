@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const SamlStrategy = require('passport-saml').Strategy;
 const fs = require('fs');
+const session = require('express-session');
 
 //var port = normalizePort(process.env.PORT || '80');
 //console.log("port is ", port);
@@ -31,6 +32,11 @@ const app = express();
 // Set up middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: true
+}));
 
 // Define the login route
 app.get('/login', passport.authenticate('saml'));
@@ -47,6 +53,8 @@ app.post('/callback',
 app.get('/', (req, res) => {
   if (req.isAuthenticated()) {
     //res.send('Hello, ' + req.user.nameID);
+    req.session.views = (req.session.views || 0) + 1;
+    res.send(`Number of views: ${req.session.views}`);
     res.sendFile('saml.html', {root: __dirname + ''});
   } else {
     res.redirect('/login');
