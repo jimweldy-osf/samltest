@@ -4,11 +4,15 @@ const passport = require('passport');
 const SamlStrategy = require('passport-saml').Strategy;
 const fs = require('fs');
 
+//var port = normalizePort(process.env.PORT || '80');
+//console.log("port is ", port);
+const port = 8080;
+
 // Define the SAML configuration options
 const samlConfig = {
   entryPoint: 'https://mocksaml.com/saml/login',
   issuer: 'https://devicetable.com',
-  callbackUrl: 'http://osf-dev-env.eba-kdcjyk3f.us-east-1.elasticbeanstalk.com/callback',
+  callbackUrl: 'https://samltest.devicetable.com/callback',
   //cert: '-----BEGIN CERTIFICATE-----\n<certificate goes here>\n-----END CERTIFICATE-----',
   cert: fs.readFileSync("./certs/idp_key.pem", "utf-8")
 };
@@ -50,6 +54,6 @@ app.get('/', (req, res) => {
 });
 
 // Start the server
-app.listen(80, () => {
-  console.log('Server started on port 80');
+app.listen(port, () => {
+  console.log('Server started on port ', port);
 });
