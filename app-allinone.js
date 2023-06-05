@@ -93,7 +93,7 @@ app.get('/metadata', (req, res) => {
   //decrypcert = fs.readFileSync('certs/cert.pem','utf8');
   //console.log("checkpoint charlie ", decrypcert);
   res.send(
-  samlStrategy.generateServiceProviderMetadata(
+  SamlStrategy.generateServiceProviderMetadata(
       fs.readFileSync("certs/cert.pem", "utf8")
   )
   );  
