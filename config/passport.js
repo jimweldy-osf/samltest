@@ -17,7 +17,8 @@ passport.use(
       {
         entryPoint: "https://mocksaml.com/saml/login",
         issuer: "devicetable.com",
-        callbackUrl: "http://osf-dev-env.eba-kdcjyk3f.us-east-1.elasticbeanstalk.com/callback",
+        callbackUrl: "https://samltest.devicetable.com/callback",
+        //callbackUrl: "http://osf-dev-env.eba-kdcjyk3f.us-east-1.elasticbeanstalk.com/callback",
         //privateKey: fs.readFileSync("./certs/key.pem", "utf-8"),
         cert: fs.readFileSync("./certs/idp_key.pem", "utf-8") /*,
         authnContext: [
@@ -37,5 +38,7 @@ passport.use(
     }
     )
 );
+
+//console.log("About to export and exit");
 
 module.exports = passport;
