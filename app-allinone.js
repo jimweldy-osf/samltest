@@ -84,3 +84,17 @@ app.get('/lose', (req, res) => {
   console.log("about to send saml.html ...");
   res.sendFile('saml.html', {root: __dirname + ''}); 
 });
+
+app.get('/metadata', (req, res) => {
+  res.type("application/xml");
+  decrypcert = fs.readFileSync('certs/cert.pem','utf8');
+  console.log("checkpoint charlie ", decrypcert);
+  res.status(200);
+  //decrypcert = fs.readFileSync('certs/cert.pem','utf8');
+  //console.log("checkpoint charlie ", decrypcert);
+  res.send(
+  samlStrategy.generateServiceProviderMetadata(
+      fs.readFileSync("certs/cert.pem", "utf8")
+  )
+  );  
+});
