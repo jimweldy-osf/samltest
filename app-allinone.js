@@ -20,13 +20,14 @@ const port = 8080;
 
 // Define the SAML configuration options
 const samlConfig = {
-  entryPoint: 'https://mocksaml.com/saml/login',
+  entryPoint: 'https://samltest.id/idp/profile/SAML2/Redirect/SSO',
+  //entryPoint: 'https://mocksaml.com/saml/login',
   issuer: 'https://devicetable.com',
   callbackUrl: 'https://samltest.devicetable.com/callback',
-  cert: fs.readFileSync("./certs/idp_key.pem", "utf-8"),
-  identifierFormat: null,
+  cert: fs.readFileSync("./certs/samltest-id-public.key", "utf-8"),
   decryptionPvk: fs.readFileSync('./certs/key.pem', 'utf8'),
-  privateCert: fs.readFileSync('./certs/key.pem', 'utf8'),
+  privateCert: fs.readFileSync('./certs/cert.pem', 'utf8'),
+  identifierFormat: null,
   validateInResponseTo: false,
   disableRequestedAuthnContext: true
 };
@@ -104,7 +105,7 @@ app.get('/', (req, res) => {
     //res.send('Hello, ' + req.user.nameID);
     req.session.views = (req.session.views || 0) + 1;
     res.send(`Number of views: ${req.session.views}`);
-    res.sendFile('saml.html', {root: __dirname + ''});
+    res.sendFile('sec.html', {root: __dirname + ''});
   } else {
     res.redirect('/login');
   }
