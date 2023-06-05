@@ -51,7 +51,8 @@ app.get('/login', passport.authenticate('saml'));
 
 // Define the callback route
 app.post('/callback',
-  passport.authenticate('saml', { failureRedirect: '/login' }),
+  midlog,
+  passport.authenticate('saml', { failureRedirect: '/lose' }),
   (req, res) => {
     res.redirect('/');
   }
@@ -72,4 +73,14 @@ app.get('/', (req, res) => {
 // Start the server
 app.listen(port, () => {
   console.log('Server started on port ', port);
+});
+
+function midlog(req, res, next) {
+  console.log("made it to my own midlogger");
+  next();
+}
+
+app.get('/lose', (req, res) => {
+  console.log("about to send saml.html ...");
+  res.sendFile('saml.html', {root: __dirname + ''}); 
 });
