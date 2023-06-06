@@ -119,6 +119,7 @@ app.listen(port, () => {
 
 function midlog(req, res, next) {
   console.log("made it to my own midlogger");
+  console.log(req);
   next();
 }
 
