@@ -24,7 +24,7 @@ const samlConfig = {
   //entryPoint: 'https://mocksaml.com/saml/login',
   issuer: 'https://devicetable.com',
   callbackUrl: 'https://samltest.devicetable.com/callback',
-  cert: fs.readFileSync("./certs/samltest-id-public.key", "utf-8"),
+  cert: fs.readFileSync("./certs/samltest-id-public.pem", "utf-8"),
   decryptionPvk: fs.readFileSync('./certs/key.pem', 'utf8'),
   privateCert: fs.readFileSync('./certs/cert.pem', 'utf8'),
   identifierFormat: null,
