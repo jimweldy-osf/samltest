@@ -29,7 +29,8 @@ const samlConfig = {
   privateCert: fs.readFileSync('./certs/cert.pem', 'utf8'),
   identifierFormat: null,
   validateInResponseTo: false,
-  disableRequestedAuthnContext: true
+  disableRequestedAuthnContext: true,
+  debug: true
 };
 
 var samlStrategy = new saml.Strategy(
@@ -38,7 +39,6 @@ var samlStrategy = new saml.Strategy(
       return done(null, profile); 
     });
 
-samlStrategy.options.debug = true;
 passport.use(samlStrategy);
 
 
