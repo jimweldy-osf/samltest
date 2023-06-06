@@ -37,7 +37,8 @@ var samlStrategy = new saml.Strategy(
     function(profile, done) {
       return done(null, profile); 
     });
-    
+
+samlStrategy.options.debug = true;
 passport.use(samlStrategy);
 
 
@@ -73,7 +74,7 @@ var samlStrategy = new saml.Strategy({
 });
 */
 
-passport.use(samlStrategy);
+//passport.use(samlStrategy);
 
 // Create the Express app
 const app = express();
